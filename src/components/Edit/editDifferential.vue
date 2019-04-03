@@ -13,15 +13,15 @@
         >Edit Differential</b-navbar-brand>
       </b-navbar>
 
-      <div v-for="(item , index) in person" :key="index" style="margin-top:25px;">
-        <div v-if="item.code == $route.params.id">
+      <div v-for="(item , index) in ex.results" :key="index" style="margin-top:25px;">
+        <div v-if="item.id == $route.params.id">
           <!-- <label>Code :&nbsp;</label> -->
           <v-flex xs5 offset-xs4>
-            <v-text-field label="Code" v-model="item.code" disabled style="font-size:1.7em;"></v-text-field>
+            <v-text-field label="Code" v-model="item.code" style="font-size:1.3em;"></v-text-field>
           </v-flex>
 
           <v-flex xs5 offset-xs4>
-            <v-text-field label="Blood" v-model="item.blood" style="font-size:1.7em;"></v-text-field>
+            <v-text-field label="Label" v-model="item.label" style="font-size:1.3em;"></v-text-field>
           </v-flex>
 
           <v-flex xs5 offset-xs4>
@@ -29,14 +29,15 @@
             <v-checkbox
               class="chBox"
               color="blue"
-              v-model="selected"
+              v-model="item.active"
               label="Active"
-              value="Active"
               style="margin-boot"
             ></v-checkbox>
           </v-flex>
 
-          <v-btn small color="green" style="color:white;">SAVE</v-btn>
+          <router-link to="/differential">
+            <v-btn small color="green" style="color:white;" v-on:click="editEX(item)">SAVE</v-btn>
+          </router-link>
 
           <router-link to="/differential">
             <v-btn small color="red" style="color:white;">cancel</v-btn>
@@ -49,6 +50,8 @@
 
 <script>
 import ToolbarAddEdit from "../ToolbarAddEdit.vue";
+import axios from "axios";
+import { mapState, mapActions } from "vuex";
 export default {
   components: {
     ToolbarAddEdit
@@ -65,7 +68,34 @@ export default {
       selected: []
     };
   },
-  methods: {}
+  computed: {
+    ...mapState(["ex"])
+  },
+  methods: {
+    ...mapActions(["callEX"]),
+
+    editEX(item) {
+      var self = this;
+      
+      axios
+        .put("/api/base/base-exes/" + self.$route.params.id, {
+          code: item.code,
+          label: item.label,
+          active: item.active
+        })
+        .then(function(response) {
+          console.log(response);
+          self.callEX();
+        })
+        .catch(function(error) {
+          console.log(error);
+          alert("The object with the given CODE was existed.");
+        });
+    }
+  },
+  mounted() {
+    this.callEX();
+  }
 };
 </script>
 

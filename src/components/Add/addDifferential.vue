@@ -17,24 +17,26 @@
         <div>
           <!-- <label>Code :&nbsp;</label> -->
           <v-flex xs5 offset-xs4>
-            <v-text-field label="Code" v-model="code" style="font-size:1.7em;"></v-text-field>
+            <v-text-field label="Code" v-model="code" style="font-size:1.3em;"></v-text-field>
           </v-flex>
 
           <v-flex xs5 offset-xs4>
-            <v-text-field label="Blood" v-model="blood" style="font-size:1.7em;"></v-text-field>
+            <v-text-field label="Label" v-model="blood" style="font-size:1.3em;"></v-text-field>
           </v-flex>
           <v-flex xs5 offset-xs4>
             <!-- <p v-for="item in selected" :key="item">{{ item }}</p> -->
             <v-checkbox
               class="chBox"
               color="blue"
-              v-model="selected"
+              v-model="active"
               label="Active"
-              value="Active"
               style="margin-boot"
             ></v-checkbox>
           </v-flex>
-          <v-btn small color="green" style="color:white;">SAVE</v-btn>
+
+          <router-link to="/differential">
+            <v-btn small color="green" style="color:white;" v-on:click="addEX()">SAVE</v-btn>
+          </router-link>
 
           <router-link to="/differential">
             <v-btn small color="red" style="color:white;">cancel</v-btn>
@@ -47,6 +49,7 @@
 
 <script>
 import ToolbarAddEdit from "../ToolbarAddEdit.vue";
+import axios from "axios";
 export default {
   components: {
     ToolbarAddEdit
@@ -55,10 +58,32 @@ export default {
     return {
       code: "",
       blood: "",
-      selected: []
+      active: true
     };
   },
-  methods: {}
+  methods: {
+    addEX() {
+      axios.defaults.baseURL = "http://chaofavc.somprasongd.work:81";
+      axios.defaults.headers.common[
+        "Authorization"
+      ] = `JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZ3JvdXBzIjpbeyJpZCI6MSwibmFtZSI6InJlZ2lzdGVyIn0seyJpZCI6MiwibmFtZSI6ImRvY3RvciJ9LHsiaWQiOjMsIm5hbWUiOiJsYWIifSx7ImlkIjo0LCJuYW1lIjoicGhhcm1hY3kifSx7ImlkIjo1LCJuYW1lIjoiY2FzaGllciJ9XSwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNTU0MTkyNDA5fQ.O923cGJ8aiEji_E1SzPz5PjD1PsGNhhDB3JTD2M6TP8`;
+
+      axios
+        .post("/api/base/base-exes", {
+          code: this.code,
+          label: this.blood,
+          active: this.active
+        })
+        .then(function(response) {
+          console.log(response);
+        })
+        .catch(function(error) {
+          console.log(error);
+          alert("The object with the given CODE was existed.");
+        });
+      console.log("add");
+    }
+  }
 };
 </script>
 
