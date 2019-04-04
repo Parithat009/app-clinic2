@@ -111,12 +111,28 @@
             <v-card-text>Are you want to delete ?</v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="green darken-1" flat @click="dialog = false" v-on:click="deleteConfirm()">Yes</v-btn>
+              <v-btn
+                color="green darken-1"
+                flat
+                @click="dialog = false"
+                v-on:click="deleteConfirm()"
+              >Yes</v-btn>
               <v-btn color="red darken-1" flat @click="dialog = false">Cancel</v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>
       </v-card>
+      <v-snackbar
+        v-model="snackbar"
+        :bottom="y === 'bottom'"
+        :top="y === 'top'"
+        :right="x === 'right'"
+        :timeout="timeout"
+        :color="snColor"
+      >
+        {{ snText }}
+        <v-btn color="white" flat @click="snStop">ปิด</v-btn>
+      </v-snackbar>
     </div>
   </div>
 </template>
@@ -130,7 +146,7 @@ export default {
     Toolbar
   },
   computed: {
-    ...mapState(["ht"])
+    ...mapState(["ht", "snColor", "snText", "snackbar"])
   },
   data() {
     return {
@@ -155,7 +171,11 @@ export default {
         { text: "Label", sortable: false }
         // { text: "", sortable: false }
       ],
-      delete: null
+      delete: null,
+
+      y: "bottom",
+      x: "right",
+      timeout: 0
     };
   },
   methods: {
@@ -170,6 +190,7 @@ export default {
         .then(function(response) {
           console.log(response);
           self.callHT();
+          self.snAdd();
         });
     },
     editCode(i) {
@@ -178,7 +199,7 @@ export default {
     add() {
       this.$router.push({ path: "./history/add" });
     },
-    ...mapActions(["callHT"])
+    ...mapActions(["callHT", "snStop", "snAdd"])
   },
   mounted() {
     this.callHT();

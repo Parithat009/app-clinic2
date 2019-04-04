@@ -72,7 +72,7 @@ export default {
     ...mapState(["data"])
   },
   methods: {
-    ...mapActions(["callApi"]),
+    ...mapActions(["callApi","snAdd","snAddErr"]),
 
     editCC(item) {
       var self = this;
@@ -90,10 +90,11 @@ export default {
         .then(function(response) {
           console.log(response);
           self.callApi();
+          self.snAdd();
         })
         .catch(function(error) {
           console.log(error);
-          alert('The object with the given CODE was existed.');
+          self.snAddErr();
         });
 
      

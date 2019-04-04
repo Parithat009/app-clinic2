@@ -17,7 +17,7 @@
         <div v-if="item.id == $route.params.id">
           <!-- <label>Code :&nbsp;</label> -->
           <v-flex xs5 offset-xs4>
-            <v-text-field label="Code" v-model="item.code"  style="font-size:1.3em;"></v-text-field>
+            <v-text-field label="Code" v-model="item.code" style="font-size:1.3em;"></v-text-field>
           </v-flex>
 
           <v-flex xs5 offset-xs4>
@@ -72,7 +72,7 @@ export default {
     ...mapState(["ht"])
   },
   methods: {
-    ...mapActions(["callHT"]),
+    ...mapActions(["callHT", "snAdd", "snAddErr"]),
 
     editHT(item) {
       var self = this;
@@ -86,10 +86,11 @@ export default {
         .then(function(response) {
           console.log(response);
           self.callHT();
+          self.snAdd();
         })
         .catch(function(error) {
           console.log(error);
-          alert("The object with the given CODE was existed.");
+          self.snAddErr();
         });
     }
   },

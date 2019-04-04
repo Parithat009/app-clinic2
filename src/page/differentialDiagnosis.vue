@@ -122,6 +122,17 @@
           </v-card>
         </v-dialog>
       </v-card>
+      <v-snackbar
+        v-model="snackbar"
+        :bottom="y === 'bottom'"
+        :top="y === 'top'"
+        :right="x === 'right'"
+        :timeout="timeout"
+        :color="snColor"
+      >
+        {{ snText }}
+        <v-btn color="white" flat @click="snStop">ปิด</v-btn>
+      </v-snackbar>
     </div>
   </div>
 </template>
@@ -135,7 +146,7 @@ export default {
     Toolbar
   },
   computed: {
-    ...mapState(["ex"])
+    ...mapState(["ex", "snColor", "snText", "snackbar"])
   },
 
   data() {
@@ -161,7 +172,11 @@ export default {
         { text: "Label", sortable: false }
         // { text: "", sortable: false }
       ],
-      delete: null
+      delete: null,
+
+      y: "bottom",
+      x: "right",
+      timeout: 0
     };
   },
   methods: {
@@ -176,6 +191,7 @@ export default {
         .then(function(response) {
           console.log(response);
           self.callEX();
+          self.snAdd();
         });
     },
     editCode(i) {
@@ -184,7 +200,7 @@ export default {
     add() {
       this.$router.push({ path: "./differential/add" });
     },
-    ...mapActions(["callEX"])
+    ...mapActions(["callEX", "snStop", "snAdd"])
   },
   mounted() {
     this.callEX();

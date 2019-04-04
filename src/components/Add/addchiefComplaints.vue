@@ -49,11 +49,13 @@
 
 <script>
 import ToolbarAddEdit from "../ToolbarAddEdit.vue";
+import { mapActions } from "vuex";
 import axios from "axios";
 export default {
   components: {
     ToolbarAddEdit
   },
+  
   data() {
     return {
       code: "",
@@ -63,6 +65,7 @@ export default {
   },
   methods: {
     addCC() {
+      var self = this;
       axios.defaults.baseURL = "http://chaofavc.somprasongd.work:81";
       axios.defaults.headers.common[
         "Authorization"
@@ -76,13 +79,15 @@ export default {
         })
         .then(function(response) {
           console.log(response);
+          self.snAdd();
         })
         .catch(function(error) {
           console.log(error);
-          alert('The object with the given CODE was existed.');
+          self.snAddErr();
         });
       console.log("add");
-    }
+    },
+    ...mapActions(["snAdd","snAddErr"])
   }
 };
 </script>

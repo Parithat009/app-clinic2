@@ -8,9 +8,12 @@ export default new Vuex.Store({
     state: {
         data: {},
         ex: {},
-        ht:{},
-        pe:{},
-        snackbar: false
+        ht: {},
+        pe: {},
+        snackbar: false,
+        snColor: null,
+        snText: null
+
     },
     actions: {
         callApi({ commit }) {
@@ -89,14 +92,43 @@ export default new Vuex.Store({
                 .catch(function (error) {
                     console.log("Error:", error);
                 });
+        },
+        snAdd({ commit }) {
+            commit('snAdd')
+
+        },
+        snAddErr({ commit }) {
+            commit('snAddErr')
+
+        },
+        snStop({ commit }) {
+            commit('snStop')
         }
 
     },
     mutations: {
         callApi() {
             var self = this;
+        },
+        snAdd() {
+            var self = this;
 
+            self.state.snackbar = true;
+            self.state.snColor = 'green';
+            self.state.snText = 'Successful !';
 
+        },
+        snAddErr() {
+            var self = this;
+
+            self.state.snackbar = true;
+            self.state.snColor = 'red';
+            self.state.snText = 'Unsuccessful !';
+
+        },
+        snStop() {
+            var self = this;
+            self.state.snackbar = false;
         }
     }
 });

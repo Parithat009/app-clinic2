@@ -111,12 +111,28 @@
             <v-card-text>Are you want to delete ?</v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="green darken-1" flat @click="dialog = false" v-on:click="deleteConfirm()">Yes</v-btn>
+              <v-btn
+                color="green darken-1"
+                flat
+                @click="dialog = false"
+                v-on:click="deleteConfirm()"
+              >Yes</v-btn>
               <v-btn color="red darken-1" flat @click="dialog = false">Cancel</v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>
       </v-card>
+      <v-snackbar
+        v-model="snackbar"
+        :bottom="y === 'bottom'"
+        :top="y === 'top'"
+        :right="x === 'right'"
+        :timeout="timeout"
+        :color="snColor"
+      >
+        {{ snText }}
+        <v-btn color="white" flat @click="snStop">ปิด</v-btn>
+      </v-snackbar>
     </div>
   </div>
 </template>
@@ -129,8 +145,8 @@ export default {
   components: {
     Toolbar
   },
-computed: {
-    ...mapState(["pe"])
+  computed: {
+    ...mapState(["pe", "snColor", "snText", "snackbar"])
   },
   data() {
     return {
@@ -155,22 +171,26 @@ computed: {
         { text: "Label", sortable: false }
         // { text: "", sortable: false }
       ],
-       delete: null
+      delete: null,
+
+      y: "bottom",
+      x: "right",
+      timeout: 0
     };
   },
   methods: {
-    
     deleteCode(i) {
       this.delete = i;
       console.log(this.delete);
     },
-     deleteConfirm() {
+    deleteConfirm() {
       var self = this;
       axios
         .delete("/api/base/base-pes/" + self.delete.id)
         .then(function(response) {
           console.log(response);
           self.callPE();
+          self.snAdd();
         });
     },
     editCode(i) {
@@ -179,9 +199,9 @@ computed: {
     add() {
       this.$router.push({ path: "./physical/add" });
     },
-    ...mapActions(["callPE"])
+    ...mapActions(["callPE", "snStop", "snAdd"])
   },
-   mounted() {
+  mounted() {
     this.callPE();
   }
 };

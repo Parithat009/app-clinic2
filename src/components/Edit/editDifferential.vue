@@ -72,11 +72,11 @@ export default {
     ...mapState(["ex"])
   },
   methods: {
-    ...mapActions(["callEX"]),
+    ...mapActions(["callEX", "snAdd", "snAddErr"]),
 
     editEX(item) {
       var self = this;
-      
+
       axios
         .put("/api/base/base-exes/" + self.$route.params.id, {
           code: item.code,
@@ -86,10 +86,11 @@ export default {
         .then(function(response) {
           console.log(response);
           self.callEX();
+          self.snAdd();
         })
         .catch(function(error) {
           console.log(error);
-          alert("The object with the given CODE was existed.");
+          self.snAddErr();
         });
     }
   },
