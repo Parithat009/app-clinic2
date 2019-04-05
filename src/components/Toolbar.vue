@@ -55,14 +55,38 @@
         <v-list class="pt-0" dense>
           <v-divider light></v-divider>
 
-          <v-list-tile v-for="item in items" :key="item.title" v-on:click="goto(item.path)">
-            <v-list-tile-action>
-              <!-- <v-icon>{{ item.icon }}</v-icon> -->
-              <v-list-tile-content>
-                <v-list-tile-title style="font-size:1.1rem;">{{ item.title }}</v-list-tile-title>
-              </v-list-tile-content>
-            </v-list-tile-action>
-          </v-list-tile>
+          <v-list-group no-action sub-group value="true">
+            <template v-slot:activator>
+              <v-list-tile>
+                <v-list-tile-title>Admin</v-list-tile-title>
+              </v-list-tile>
+            </template>
+
+            <v-list-tile v-for="item in items" :key="item.title" v-on:click="goto(item.path)">
+              <v-list-tile-action>
+                <!-- <v-icon>{{ item.icon }}</v-icon> -->
+                <v-list-tile-content>
+                  <v-list-tile-title style="font-size:1.1rem;">{{ item.title }}</v-list-tile-title>
+                </v-list-tile-content>
+              </v-list-tile-action>
+            </v-list-tile>
+          </v-list-group>
+
+          <v-list-group no-action sub-group value="true">
+            <template v-slot:activator>
+              <v-list-tile>
+                <v-list-tile-title>Item</v-list-tile-title>
+              </v-list-tile>
+            </template>
+            <v-list-tile v-for="item in items2" :key="item.title" v-on:click="goto(item.path)">
+              <v-list-tile-action>
+                <!-- <v-icon>{{ item.icon }}</v-icon> -->
+                <v-list-tile-content>
+                  <v-list-tile-title style="font-size:1.1rem;">{{ item.title }}</v-list-tile-title>
+                </v-list-tile-content>
+              </v-list-tile-action>
+            </v-list-tile>
+          </v-list-group>
         </v-list>
       </v-navigation-drawer>
     </div>
@@ -111,6 +135,12 @@ export default {
         { title: "Differential Diagnosiss", path: "differential" },
         { title: "History Rankings", path: "history" },
         { title: "Physical Examinations", path: "physical" }
+      ],
+      items2: [
+        { title: "Caution", path: "caution" },
+        { title: "Frequency", path: "frequency" },
+        { title: "Instruction", path: "instruction" },
+        { title: "Unit", path: "unit" }
       ],
       drawer: null,
       mini: false,

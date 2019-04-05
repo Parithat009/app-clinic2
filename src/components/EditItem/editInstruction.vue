@@ -10,35 +10,36 @@
       >
         <b-navbar-brand
           style="font-size: 1.2em; font-weight:bold; text-shadow: 1.7px 2px 1.7px rgb(86, 125, 121);"
-        >Add Physical</b-navbar-brand>
+        >Edit Instruction</b-navbar-brand>
       </b-navbar>
 
-      <div style="margin-top:25px;">
-        <div>
+      <div v-for="(item , index) in instruction.results" :key="index" style="margin-top:25px;">
+        <div v-if="item.id == $route.params.id">
           <!-- <label>Code :&nbsp;</label> -->
           <v-flex xs5 offset-xs4>
-            <v-text-field label="Code" v-model="code" style="font-size:1.3em;"></v-text-field>
+            <v-text-field label="Code" v-model="item.code" style="font-size:1.3em;"></v-text-field>
           </v-flex>
 
           <v-flex xs5 offset-xs4>
-            <v-text-field label="Label" v-model="blood" style="font-size:1.3em;"></v-text-field>
+            <v-text-field label="Label" v-model="item.label" style="font-size:1.3em;"></v-text-field>
           </v-flex>
+
           <v-flex xs5 offset-xs4>
             <!-- <p v-for="item in selected" :key="item">{{ item }}</p> -->
             <v-checkbox
               class="chBox"
               color="blue"
-              v-model="active"
+              v-model="item.active"
               label="Active"
               style="margin-boot"
             ></v-checkbox>
           </v-flex>
 
-          <router-link to="/physical" class="rtl">
-            <v-btn small color="green" style="color:white;" v-on:click="addPE()">SAVE</v-btn>
+          <router-link to="/instruction" class="rtl">
+            <v-btn small color="green" style="color:white;" v-on:click="editCC(item)">SAVE</v-btn>
           </router-link>
 
-          <router-link to="/physical" class="rtl">
+          <router-link to="/instruction" class="rtl">
             <v-btn small color="red" style="color:white;">cancel</v-btn>
           </router-link>
         </div>
@@ -50,20 +51,30 @@
 <script>
 import ToolbarAddEdit from "../ToolbarAddEdit.vue";
 import axios from "axios";
-import { mapActions } from "vuex";
+import { mapState, mapActions } from "vuex";
 export default {
   components: {
     ToolbarAddEdit
   },
   data() {
     return {
-      code: "",
-      blood: "",
-      active: true
+      person: [
+        { code: "1", blood: "o" },
+        { code: "12", blood: "a" },
+        { code: "13", blood: "b" },
+        { code: "14", blood: "c" },
+        { code: "15", blood: "d" }
+      ],
+      selected: []
     };
   },
+  computed: {
+    ...mapState(["instruction"])
+  },
   methods: {
-    addPE() {
+    ...mapActions(["callInstruction","snAdd","snAddErr"]),
+
+    editCC(item) {
       var self = this;
       axios.defaults.baseURL = "http://chaofavc.somprasongd.work:81";
       axios.defaults.headers.common[
@@ -71,27 +82,39 @@ export default {
       ] = `JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZ3JvdXBzIjpbeyJpZCI6MSwibmFtZSI6InJlZ2lzdGVyIn0seyJpZCI6MiwibmFtZSI6ImRvY3RvciJ9LHsiaWQiOjMsIm5hbWUiOiJsYWIifSx7ImlkIjo0LCJuYW1lIjoicGhhcm1hY3kifSx7ImlkIjo1LCJuYW1lIjoiY2FzaGllciJ9XSwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNTU0MTkyNDA5fQ.O923cGJ8aiEji_E1SzPz5PjD1PsGNhhDB3JTD2M6TP8`;
 
       axios
-        .post("/api/base/base-pes", {
-          code: this.code,
-          label: this.blood,
-          active: this.active
+        .put("/api/base/item-instructions/" + self.$route.params.id, {
+          code: item.code,
+          label: item.label,
+          active:item.active
         })
         .then(function(response) {
           console.log(response);
+          self.callInstruction();
           self.snAdd();
         })
         .catch(function(error) {
           console.log(error);
           self.snAddErr();
         });
-      console.log("add");
-    },
-    ...mapActions(["snAdd", "snAddErr"])
+
+     
+    }
+  },
+  mounted() {
+    this.callInstruction();
   }
 };
 </script>
 
 <style scoped>
+* {
+  box-sizing: border-box;
+}
+.menu {
+  width: 17%;
+  float: left;
+  height: 100vh;
+}
 .rtl{
   text-decoration: none;
 
@@ -111,15 +134,6 @@ export default {
     padding: 1.5rem;
   }
   /* mobile โทสัพ */
-}
-
-* {
-  box-sizing: border-box;
-}
-.menu {
-  width: 17%;
-  float: left;
-  height: 100vh;
 }
 .chBox {
   margin-top: 0px;

@@ -35,11 +35,11 @@
             ></v-checkbox>
           </v-flex>
 
-          <router-link to="/differential">
+          <router-link to="/differential" class="rtl">
             <v-btn small color="green" style="color:white;" v-on:click="editEX(item)">SAVE</v-btn>
           </router-link>
 
-          <router-link to="/differential">
+          <router-link to="/differential" class="rtl">
             <v-btn small color="red" style="color:white;">cancel</v-btn>
           </router-link>
         </div>
@@ -109,7 +109,10 @@ export default {
   float: left;
   height: 100vh;
 }
+.rtl{
+  text-decoration: none;
 
+}
 @media (min-width: 992px) {
   .main {
     width: 83%;

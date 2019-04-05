@@ -34,11 +34,11 @@
             ></v-checkbox>
           </v-flex>
 
-          <router-link to="/history">
+          <router-link to="/history" class="rtl">
             <v-btn small color="green" style="color:white;" v-on:click="addHT()">SAVE</v-btn>
           </router-link>
 
-          <router-link to="/history">
+          <router-link to="/history" class="rtl">
             <v-btn small color="red" style="color:white;">cancel</v-btn>
           </router-link>
         </div>
@@ -93,6 +93,10 @@ export default {
 </script>
 
 <style scoped>
+.rtl{
+  text-decoration: none;
+
+}
 @media (min-width: 992px) {
   .main {
     width: 83%;

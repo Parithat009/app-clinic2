@@ -35,11 +35,11 @@
             ></v-checkbox>
           </v-flex>
 
-          <router-link to="/physical">
+          <router-link to="/physical" class="rtl">
             <v-btn small color="green" style="color:white;" v-on:click="editPE(item)">SAVE</v-btn>
           </router-link>
 
-          <router-link to="/physical">
+          <router-link to="/physical" class="rtl">
             <v-btn small color="red" style="color:white;">cancel</v-btn>
           </router-link>
         </div>
@@ -108,6 +108,10 @@ export default {
   width: 17%;
   float: left;
   height: 100vh;
+}
+.rtl{
+  text-decoration: none;
+
 }
 @media (min-width: 992px) {
   .main {

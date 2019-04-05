@@ -20,6 +20,21 @@ import addPhysical from './components/Add/addPhysical.vue'
 import addDifferential from './components/Add/addDifferential.vue'
 import addchiefComplaints from './components/Add/addchiefComplaints.vue'
 
+import Caution from './page/Caution.vue'
+import Frequency from './page/Frequency.vue'
+import Unit from './page/Unit.vue'
+import Instruction from './page/Instruction.vue'
+
+import addCaution from './components/AddItem/addCaution.vue'
+import addFrequency from './components/AddItem/addFrequency.vue'
+import addInstruction from './components/AddItem/addInstruction.vue'
+import addUnit from './components/AddItem/addUnit.vue'
+
+import editCaution from './components/EditItem/editCaution.vue'
+import editFrequency from './components/EditItem/editFrequency.vue'
+import editInstruction from './components/EditItem/editInstruction.vue'
+import editUnit from './components/EditItem/editUnit.vue'
+
 Vue.use(Router);
 
 const routes = [
@@ -44,6 +59,21 @@ const routes = [
 
    {path: '/users/edit/:id', component: editUser },
    {path: '/users/add', component: addUser },
+
+   { path: '/caution', component: Caution },
+   { path: '/frequency', component: Frequency },
+   { path: '/unit', component: Unit },
+   { path: '/instruction', component: Instruction },
+
+   {path: '/caution/add', component: addCaution },
+   {path: '/frequency/add', component: addFrequency },
+   {path: '/unit/add', component: addUnit },
+   {path: '/instruction/add', component: addInstruction },
+
+   {path: '/caution/edit/:id', component: editCaution },
+   {path: '/frequency/edit/:id', component: editFrequency },
+   {path: '/unit/edit/:id', component: editUnit },
+   {path: '/instruction/edit/:id', component: editInstruction },
 ];
 
 const router = new Router({

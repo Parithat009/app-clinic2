@@ -35,25 +35,42 @@
             />
           </div>
         </div>
-        <v-btn color="rgba(0,0,0,.3)" style="color:white; " class="loginbtn" type="submit" v-on:click="login()">Login</v-btn>
+        <v-btn
+          color="rgba(0,0,0,.3)"
+          style="color:white; "
+          class="loginbtn"
+          type="submit"
+          v-on:click="getLogin()"
+        >Login</v-btn>
       </b-form-group>
     </div>
   </div>
 </template>
 <script>
+import { mapActions } from "vuex";
 export default {
+  // computed: {
+  //   ...mapState(["username", "password"])
+  // },
   data() {
     return {
-        username:'',
-        password:'',
-        todos:[]
+      username: "",
+      password: "",
+      todos: []
     };
   },
-  methods:{
-      login(){
-        this.todos.push({username:this.username , password:this.password});
-        sessionStorage.setItem('session-storage' , JSON.stringify(this.todos));
-      }
+  methods: {
+    //  login(){
+    //     this.todos.push({username:this.username , password:this.password});
+    //     sessionStorage.setItem('session-storage' , JSON.stringify(this.todos));
+    //   },
+    ...mapActions(["login"]),
+
+    getLogin() {
+      let data = { username: this.username, password: this.password };
+      this.$store.commit("getLogin", data);
+      this.login();
+    }
   }
 };
 </script>
