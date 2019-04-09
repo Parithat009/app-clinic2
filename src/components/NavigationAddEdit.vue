@@ -2,7 +2,13 @@
   <div class="menu">
     <v-navigation-drawer dark permanent style="background-color:rgb(86, 125, 121);  width: 100%;">
       <v-list>
-         <router-link
+        <v-list-group no-action sub-group value="true">
+          <template v-slot:activator>
+            <v-list-tile>
+              <v-list-tile-title>Admin</v-list-tile-title>
+            </v-list-tile>
+          </template>
+          <router-link
             :to="'/' + item.path"
             v-for="item in items"
             :key="item.title"
@@ -18,7 +24,14 @@
               </v-list-tile-action>
             </v-list-tile>
           </router-link>
-          <h1>--------</h1>
+        </v-list-group>
+
+        <v-list-group no-action sub-group value="true">
+          <template v-slot:activator>
+            <v-list-tile>
+              <v-list-tile-title>Item</v-list-tile-title>
+            </v-list-tile>
+          </template>
           <router-link
             :to="'/' + item.path"
             v-for="item in items2"
@@ -35,6 +48,7 @@
               </v-list-tile-action>
             </v-list-tile>
           </router-link>
+        </v-list-group>
       </v-list>
     </v-navigation-drawer>
   </div>
@@ -55,7 +69,7 @@ export default {
         { title: "Frequency", path: "frequency" },
         { title: "Instruction", path: "instruction" },
         { title: "Unit", path: "unit" }
-      ],
+      ]
     };
   },
   methods: {
@@ -68,9 +82,8 @@ export default {
 </script>
 
 <style scoped>
-.rtl{
+.rtl {
   text-decoration: none;
-
 }
 .menu {
   width: 17%;

@@ -55,37 +55,51 @@
         <v-list class="pt-0" dense>
           <v-divider light></v-divider>
 
-          <router-link
-            :to="'/' + item.path"
-            v-for="item in items"
-            :key="item.title"
-            style="color:white; "
-          >
-            <v-list-tile>
-              <v-list-tile-action>
-                <!-- <v-icon>{{ item.icon }}</v-icon> -->
-                <v-list-tile-content>
-                  <v-list-tile-title style="font-size:1.1rem; font-weight:bold;">{{ item.title }}</v-list-tile-title>
-                </v-list-tile-content>
-              </v-list-tile-action>
-            </v-list-tile>
-          </router-link>
-          <h1>--------</h1>
-          <router-link
-            :to="'/' + item.path"
-            v-for="item in items2"
-            :key="item.title"
-            style="color:white; "
-          >
-            <v-list-tile>
-              <v-list-tile-action>
-                <!-- <v-icon>{{ item.icon }}</v-icon> -->
-                <v-list-tile-content>
-                  <v-list-tile-title style="font-size:1.1rem; font-weight:bold;">{{ item.title }}</v-list-tile-title>
-                </v-list-tile-content>
-              </v-list-tile-action>
-            </v-list-tile>
-          </router-link>
+          <v-list-group no-action sub-group value="true">
+            <template v-slot:activator>
+              <v-list-tile>
+                <v-list-tile-title>Admin</v-list-tile-title>
+              </v-list-tile>
+            </template>
+            <router-link
+              :to="'/' + item.path"
+              v-for="item in items"
+              :key="item.title"
+              style="color:white; "
+            >
+              <v-list-tile>
+                <v-list-tile-action>
+                  <!-- <v-icon>{{ item.icon }}</v-icon> -->
+                  <v-list-tile-content>
+                    <v-list-tile-title style="font-size:1.1rem; font-weight:bold;">{{ item.title }}</v-list-tile-title>
+                  </v-list-tile-content>
+                </v-list-tile-action>
+              </v-list-tile>
+            </router-link>
+          </v-list-group>
+
+          <v-list-group no-action sub-group value="true">
+            <template v-slot:activator>
+              <v-list-tile>
+                <v-list-tile-title>Item</v-list-tile-title>
+              </v-list-tile>
+            </template>
+            <router-link
+              :to="'/' + item.path"
+              v-for="item in items2"
+              :key="item.title"
+              style="color:white; "
+            >
+              <v-list-tile>
+                <v-list-tile-action>
+                  <!-- <v-icon>{{ item.icon }}</v-icon> -->
+                  <v-list-tile-content>
+                    <v-list-tile-title style="font-size:1.1rem; font-weight:bold;">{{ item.title }}</v-list-tile-title>
+                  </v-list-tile-content>
+                </v-list-tile-action>
+              </v-list-tile>
+            </router-link>
+          </v-list-group>
         </v-list>
       </v-navigation-drawer>
     </div>

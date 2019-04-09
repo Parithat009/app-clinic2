@@ -17,7 +17,15 @@
         <div>
           <!-- <label>Code :&nbsp;</label> -->
           <v-flex xs5 offset-xs4>
-            <v-text-field label="Username" v-model="username" style="font-size:1.7em;"></v-text-field>
+            <v-text-field label="Username" v-model="username" style="font-size:1.2em;"></v-text-field>
+          </v-flex>
+
+          <v-flex xs5 offset-xs4>
+            <v-text-field label="Name" v-model="name" style="font-size:1.2em;"></v-text-field>
+          </v-flex>
+
+          <v-flex xs5 offset-xs4>
+            <v-text-field label="Email" v-model="email" style="font-size:1.2em;"></v-text-field>
           </v-flex>
 
           <v-flex xs5 offset-xs4>
@@ -25,45 +33,40 @@
               label="Password"
               type="password"
               v-model="password"
-              style="font-size:1.7em;"
+              style="font-size:1.2em;"
             ></v-text-field>
           </v-flex>
 
-          <v-flex xs5 offset-xs4>
+          <!-- <v-flex xs5 offset-xs4>
             <v-text-field
               label="Confirm Password"
               type="password"
               v-model="confirm_password"
-              style="font-size:1.7em;"
+              style="font-size:1.2em;"
             ></v-text-field>
-          </v-flex>
+            <span style="color:red;">*sdsd</span>
+          </v-flex>-->
 
           <v-flex xs5 offset-xs4>
             <!-- <p v-for="item in selected" :key="item">{{ item }}</p> -->
             <v-checkbox
               class="chBox"
               color="blue"
-              v-model="selected"
+              v-model="active"
               label="Active"
-              value="Active"
               style="margin-boot"
             ></v-checkbox>
-            <v-checkbox
-              class="chBox"
-              color="blue"
-              v-model="selected"
-              label="Staff status"
-              value="Staff status"
-            ></v-checkbox>
+            <v-checkbox class="chBox" color="blue" v-model="isAdmin" label="Staff status"></v-checkbox>
           </v-flex>
 
-          <v-flex xs10 offset-xs1>
+          <!-- <v-flex xs10 offset-xs1>
             <v-text-field label="Username" v-model="username" style="font-size:1.7em;"></v-text-field>
-          </v-flex>
+          </v-flex>-->
+          <router-link to="/users" class="rtl">
+            <v-btn small color="green" style="color:white;" v-on:click="addUser()">SAVE</v-btn>
+          </router-link>
 
-          <v-btn small color="green" style="color:white;">SAVE</v-btn>
-
-          <router-link to="/users">
+          <router-link to="/users" class="rtl">
             <v-btn small color="red" style="color:white;">cancel</v-btn>
           </router-link>
         </div>
@@ -74,6 +77,8 @@
 
 <script>
 import ToolbarAddEdit from "../ToolbarAddEdit.vue";
+import { mapActions } from "vuex";
+import axios from "axios";
 export default {
   components: {
     ToolbarAddEdit
@@ -81,12 +86,44 @@ export default {
   data() {
     return {
       username: "",
+      name: "",
+      email: "",
       password: "",
       confirm_password: "",
-      selected: []
+      active: true,
+      isAdmin: false
     };
   },
-  methods: {}
+  methods: {
+    addUser() {
+      var self = this;
+      axios.defaults.baseURL = "http://chaofavc.somprasongd.work:81";
+      axios.defaults.headers.common[
+        "Authorization"
+      ] = `JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZ3JvdXBzIjpbeyJpZCI6MSwibmFtZSI6InJlZ2lzdGVyIn0seyJpZCI6MiwibmFtZSI6ImRvY3RvciJ9LHsiaWQiOjMsIm5hbWUiOiJsYWIifSx7ImlkIjo0LCJuYW1lIjoicGhhcm1hY3kifSx7ImlkIjo1LCJuYW1lIjoiY2FzaGllciJ9XSwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNTU0MTkyNDA5fQ.O923cGJ8aiEji_E1SzPz5PjD1PsGNhhDB3JTD2M6TP8`;
+
+      axios
+        .post("/api/users/admin", {
+          username: this.username,
+          name: this.name,
+          email: this.email,
+          password: this.password,
+          active: this.active,
+          isAdmin: this.isAdmin,
+          groups: [1, 2]
+        })
+        .then(function(response) {
+          console.log(response);
+          self.snAdd();
+        })
+        .catch(function(error) {
+          console.log(error);
+          self.snAddErr();
+        });
+      console.log("add user ..");
+    },
+    ...mapActions(["snAdd", "snAddErr"])
+  }
 };
 </script>
 
@@ -119,5 +156,8 @@ export default {
 .chBox {
   margin-top: 0px;
   padding-top: 0px;
+}
+.rtl {
+  text-decoration: none;
 }
 </style>
