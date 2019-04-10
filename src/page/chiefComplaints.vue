@@ -210,6 +210,11 @@ export default {
   },
   mounted() {
     this.callApi();
+    this.$nextTick(() => {
+      setTimeout(() => {
+        this.callApi();
+      }, 400);
+    });
   }
 };
 </script>

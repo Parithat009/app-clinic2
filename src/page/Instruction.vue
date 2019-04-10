@@ -210,6 +210,11 @@ export default {
   },
   mounted() {
     this.callInstruction();
+    this.$nextTick(() => {
+      setTimeout(() => {
+        this.callInstruction();
+      }, 400);
+    });
   }
 };
 </script>

@@ -203,6 +203,11 @@ export default {
   },
   mounted() {
     this.callPE();
+    this.$nextTick(() => {
+      setTimeout(() => {
+        this.callPE();
+      }, 400);
+    });
   }
 };
 </script>

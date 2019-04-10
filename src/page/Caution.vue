@@ -206,10 +206,15 @@ export default {
     add() {
       this.$router.push({ path: "./caution/add" });
     },
-    ...mapActions(["callCaution", "snStop","snAdd"])
+    ...mapActions(["callCaution", "snStop", "snAdd"])
   },
   mounted() {
     this.callCaution();
+    this.$nextTick(() => {
+      setTimeout(() => {
+        this.callCaution();
+      }, 400);
+    });
   }
 };
 </script>

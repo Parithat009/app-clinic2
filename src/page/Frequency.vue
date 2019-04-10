@@ -210,6 +210,11 @@ export default {
   },
   mounted() {
     this.callFrequency();
+    this.$nextTick(() => {
+      setTimeout(() => {
+        this.callFrequency();
+      }, 400);
+    });
   }
 };
 </script>

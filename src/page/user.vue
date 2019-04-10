@@ -201,6 +201,11 @@ export default {
   },
   mounted() {
     this.callUser();
+    this.$nextTick(() => {
+      setTimeout(() => {
+        this.callUser();
+      }, 400);
+    });
   }
 };
 </script>

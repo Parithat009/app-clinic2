@@ -204,6 +204,11 @@ export default {
   },
   mounted() {
     this.callEX();
+    this.$nextTick(() => {
+      setTimeout(() => {
+        this.callEX();
+      }, 400);
+    });
   }
 };
 </script>

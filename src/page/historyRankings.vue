@@ -203,6 +203,11 @@ export default {
   },
   mounted() {
     this.callHT();
+    this.$nextTick(() => {
+      setTimeout(() => {
+        this.callHT();
+      }, 400);
+    });
   }
 };
 </script>
