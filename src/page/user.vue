@@ -158,7 +158,7 @@ export default {
           text: "Username",
           align: "left",
           sortable: false,
-          value: "code"
+          value: "username"
         },
 
         { text: "Name", sortable: false }

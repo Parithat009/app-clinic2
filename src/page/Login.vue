@@ -80,7 +80,7 @@ export default {
       console.log('logined')
       // this.todos.push({ username: this.username, password: this.password });
       // sessionStorage.setItem("session-storage", JSON.stringify(this.todos));
-      this.$router.push({ path: "./chiefComplaints" });
+      this.$router.push({ path: "./users" });
     }
   }
 };

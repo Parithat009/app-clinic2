@@ -96,6 +96,7 @@ export default new Vuex.Store({
             const jwt2 = "JWT ";
             axios.defaults.baseURL = 'http://chaofavc.somprasongd.work:81'
             axios.defaults.headers.common['Authorization'] = jwt2 + token2;
+
             axios
                 .get('/api/base/base-pes')
                 .then(function (res) {
@@ -113,8 +114,11 @@ export default new Vuex.Store({
         callUser() {
             var self = this;
 
+            const token2 = sessionStorage.getItem("token");
+            const jwt2 = "JWT ";
             axios.defaults.baseURL = 'http://chaofavc.somprasongd.work:81'
-            axios.defaults.headers.common['Authorization'] = axios.defaults.headers.common['Authorization'] = `JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZ3JvdXBzIjpbeyJpZCI6MSwibmFtZSI6InJlZ2lzdGVyIn0seyJpZCI6MiwibmFtZSI6ImRvY3RvciJ9LHsiaWQiOjMsIm5hbWUiOiJsYWIifSx7ImlkIjo0LCJuYW1lIjoicGhhcm1hY3kifSx7ImlkIjo1LCJuYW1lIjoiY2FzaGllciJ9XSwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNTU0MTkyNDA5fQ.O923cGJ8aiEji_E1SzPz5PjD1PsGNhhDB3JTD2M6TP8`
+            axios.defaults.headers.common['Authorization'] = jwt2 + token2;
+
             axios
                 .get('/api/users/admin')
                 .then(function (res) {

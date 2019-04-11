@@ -123,6 +123,7 @@
 </template>
 <script>
 import Navigation from "./Navigation.vue";
+import axios from "axios";
 export default {
   components: {
     Navigation
@@ -150,7 +151,9 @@ export default {
   },
   methods: {
     logout() {
-      console.log("log out .....");
+      console.log("log out.");
+      sessionStorage.removeItem("token");
+      delete axios.defaults.headers.common["Authorization"];
     },
     goto(i) {
       console.log(i);
