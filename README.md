@@ -1,4 +1,4 @@
-# app-clinic
+# app-admin
 
 ## Project setup
 ```

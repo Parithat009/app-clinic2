@@ -66,10 +66,21 @@ export default {
     //   },
     ...mapActions(["login"]),
 
-    getLogin() {
+    async getLogin() {
+
+      this.todos.push({ username: this.username, password: this.password });
+      sessionStorage.setItem("session-storage", JSON.stringify(this.todos));
+      
       let data = { username: this.username, password: this.password };
       this.$store.commit("getLogin", data);
-      this.login();
+      try{
+        await this.login();
+      }catch(e) {console.log(e)}
+      
+      console.log('logined')
+      // this.todos.push({ username: this.username, password: this.password });
+      // sessionStorage.setItem("session-storage", JSON.stringify(this.todos));
+      this.$router.push({ path: "./chiefComplaints" });
     }
   }
 };

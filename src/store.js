@@ -10,27 +10,30 @@ export default new Vuex.Store({
         ex: {},
         ht: {},
         pe: {},
-        us:{},
+        us: {},
         snackbar: false,
         snColor: null,
         snText: null,
 
         username: '',
         password: '',
-        loginData:null,
-        token:null,
+        loginData: null,
+        token: null,
 
-        caution:{},
-        frequency:{},
-        instruction:{},
-        unit:{}
+        caution: {},
+        frequency: {},
+        instruction: {},
+        unit: {}
+
 
     },
     actions: {
         callApi({ commit }) {
             var self = this;
+            const token2 = sessionStorage.getItem("token");
+            const jwt2 = "JWT ";
             axios.defaults.baseURL = 'http://chaofavc.somprasongd.work:81'
-            axios.defaults.headers.common['Authorization'] = `JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZ3JvdXBzIjpbeyJpZCI6MSwibmFtZSI6InJlZ2lzdGVyIn0seyJpZCI6MiwibmFtZSI6ImRvY3RvciJ9LHsiaWQiOjMsIm5hbWUiOiJsYWIifSx7ImlkIjo0LCJuYW1lIjoicGhhcm1hY3kifSx7ImlkIjo1LCJuYW1lIjoiY2FzaGllciJ9XSwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNTU0MTkyNDA5fQ.O923cGJ8aiEji_E1SzPz5PjD1PsGNhhDB3JTD2M6TP8`
+            axios.defaults.headers.common['Authorization'] = jwt2 + token2;
             axios
                 .get('/api/base/base-ccs')
                 .then(function (res) {
@@ -49,9 +52,10 @@ export default new Vuex.Store({
         },
         callEX() {
             var self = this;
+            const token2 = sessionStorage.getItem("token");
+            const jwt2 = "JWT ";
             axios.defaults.baseURL = 'http://chaofavc.somprasongd.work:81'
-            axios.defaults.headers.common['Authorization'] = `JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZ3JvdXBzIjpbeyJpZCI6MSwibmFtZSI6InJlZ2lzdGVyIn0seyJpZCI6MiwibmFtZSI6ImRvY3RvciJ9LHsiaWQiOjMsIm5hbWUiOiJsYWIifSx7ImlkIjo0LCJuYW1lIjoicGhhcm1hY3kifSx7ImlkIjo1LCJuYW1lIjoiY2FzaGllciJ9XSwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNTU0MTkyNDA5fQ.O923cGJ8aiEji_E1SzPz5PjD1PsGNhhDB3JTD2M6TP8`
-
+            axios.defaults.headers.common['Authorization'] = jwt2 + token2;
             axios
                 .get('/api/base/base-exes')
                 .then(function (res) {
@@ -68,9 +72,10 @@ export default new Vuex.Store({
         },
         callHT() {
             var self = this;
+            const token2 = sessionStorage.getItem("token");
+            const jwt2 = "JWT ";
             axios.defaults.baseURL = 'http://chaofavc.somprasongd.work:81'
-            axios.defaults.headers.common['Authorization'] = `JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZ3JvdXBzIjpbeyJpZCI6MSwibmFtZSI6InJlZ2lzdGVyIn0seyJpZCI6MiwibmFtZSI6ImRvY3RvciJ9LHsiaWQiOjMsIm5hbWUiOiJsYWIifSx7ImlkIjo0LCJuYW1lIjoicGhhcm1hY3kifSx7ImlkIjo1LCJuYW1lIjoiY2FzaGllciJ9XSwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNTU0MTkyNDA5fQ.O923cGJ8aiEji_E1SzPz5PjD1PsGNhhDB3JTD2M6TP8`
-
+            axios.defaults.headers.common['Authorization'] = jwt2 + token2;
             axios
                 .get('/api/base/base-hts')
                 .then(function (res) {
@@ -87,9 +92,10 @@ export default new Vuex.Store({
         },
         callPE() {
             var self = this;
+            const token2 = sessionStorage.getItem("token");
+            const jwt2 = "JWT ";
             axios.defaults.baseURL = 'http://chaofavc.somprasongd.work:81'
-            axios.defaults.headers.common['Authorization'] = `JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZ3JvdXBzIjpbeyJpZCI6MSwibmFtZSI6InJlZ2lzdGVyIn0seyJpZCI6MiwibmFtZSI6ImRvY3RvciJ9LHsiaWQiOjMsIm5hbWUiOiJsYWIifSx7ImlkIjo0LCJuYW1lIjoicGhhcm1hY3kifSx7ImlkIjo1LCJuYW1lIjoiY2FzaGllciJ9XSwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNTU0MTkyNDA5fQ.O923cGJ8aiEji_E1SzPz5PjD1PsGNhhDB3JTD2M6TP8`
-
+            axios.defaults.headers.common['Authorization'] = jwt2 + token2;
             axios
                 .get('/api/base/base-pes')
                 .then(function (res) {
@@ -104,11 +110,11 @@ export default new Vuex.Store({
                     console.log("Error:", error);
                 });
         },
-        callUser(){
+        callUser() {
             var self = this;
-            axios.defaults.baseURL = 'http://chaofavc.somprasongd.work:81'
-            axios.defaults.headers.common['Authorization'] = `JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZ3JvdXBzIjpbeyJpZCI6MSwibmFtZSI6InJlZ2lzdGVyIn0seyJpZCI6MiwibmFtZSI6ImRvY3RvciJ9LHsiaWQiOjMsIm5hbWUiOiJsYWIifSx7ImlkIjo0LCJuYW1lIjoicGhhcm1hY3kifSx7ImlkIjo1LCJuYW1lIjoiY2FzaGllciJ9XSwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNTU0MTkyNDA5fQ.O923cGJ8aiEji_E1SzPz5PjD1PsGNhhDB3JTD2M6TP8`
 
+            axios.defaults.baseURL = 'http://chaofavc.somprasongd.work:81'
+            axios.defaults.headers.common['Authorization'] = axios.defaults.headers.common['Authorization'] = `JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZ3JvdXBzIjpbeyJpZCI6MSwibmFtZSI6InJlZ2lzdGVyIn0seyJpZCI6MiwibmFtZSI6ImRvY3RvciJ9LHsiaWQiOjMsIm5hbWUiOiJsYWIifSx7ImlkIjo0LCJuYW1lIjoicGhhcm1hY3kifSx7ImlkIjo1LCJuYW1lIjoiY2FzaGllciJ9XSwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNTU0MTkyNDA5fQ.O923cGJ8aiEji_E1SzPz5PjD1PsGNhhDB3JTD2M6TP8`
             axios
                 .get('/api/users/admin')
                 .then(function (res) {
@@ -134,31 +140,34 @@ export default new Vuex.Store({
         snStop({ commit }) {
             commit('snStop')
         },
-        login({commit}) {
+        async login({ commit }) {
             var self = this;
             axios.defaults.baseURL = 'http://chaofavc.somprasongd.work:81'
-            axios.defaults.headers.common['Authorization'] = `JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZ3JvdXBzIjpbeyJpZCI6MSwibmFtZSI6InJlZ2lzdGVyIn0seyJpZCI6MiwibmFtZSI6ImRvY3RvciJ9LHsiaWQiOjMsIm5hbWUiOiJsYWIifSx7ImlkIjo0LCJuYW1lIjoicGhhcm1hY3kifSx7ImlkIjo1LCJuYW1lIjoiY2FzaGllciJ9XSwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNTU0MTkyNDA5fQ.O923cGJ8aiEji_E1SzPz5PjD1PsGNhhDB3JTD2M6TP8`
-            axios
+            // axios.defaults.headers.common['Authorization'] = `JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZ3JvdXBzIjpbeyJpZCI6MSwibmFtZSI6InJlZ2lzdGVyIn0seyJpZCI6MiwibmFtZSI6ImRvY3RvciJ9LHsiaWQiOjMsIm5hbWUiOiJsYWIifSx7ImlkIjo0LCJuYW1lIjoicGhhcm1hY3kifSx7ImlkIjo1LCJuYW1lIjoiY2FzaGllciJ9XSwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNTU0MTkyNDA5fQ.O923cGJ8aiEji_E1SzPz5PjD1PsGNhhDB3JTD2M6TP8`
+            const response = await axios
                 .post("/api/auth/login", {
                     username: self.state.username,
                     password: self.state.password
-                    
-                })
-                .then(function (response) {
-                    self.state.loginData = response.data;
-                    console.log(self.state.loginData);
-                    commit('login');
-                })
-                .catch(function (error) {
-                    console.log(error);
-                    
+
                 });
+            const token = response.data.token
+            sessionStorage.setItem('token', token)
+
+            self.state.loginData = response.data;
+            console.log(self.state.loginData);
+
+            commit('login', token);
+
+            console.log('end')
+
         },
 
         callCaution() {
             var self = this;
+            const token2 = sessionStorage.getItem("token");
+            const jwt2 = "JWT ";
             axios.defaults.baseURL = 'http://chaofavc.somprasongd.work:81'
-            axios.defaults.headers.common['Authorization'] = `JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZ3JvdXBzIjpbeyJpZCI6MSwibmFtZSI6InJlZ2lzdGVyIn0seyJpZCI6MiwibmFtZSI6ImRvY3RvciJ9LHsiaWQiOjMsIm5hbWUiOiJsYWIifSx7ImlkIjo0LCJuYW1lIjoicGhhcm1hY3kifSx7ImlkIjo1LCJuYW1lIjoiY2FzaGllciJ9XSwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNTU0MTkyNDA5fQ.O923cGJ8aiEji_E1SzPz5PjD1PsGNhhDB3JTD2M6TP8`
+            axios.defaults.headers.common['Authorization'] = jwt2 + token2;
             axios
                 .get('/api/base/item-cautions')
                 .then(function (res) {
@@ -175,8 +184,10 @@ export default new Vuex.Store({
         },
         callFrequency() {
             var self = this;
+            const token2 = sessionStorage.getItem("token");
+            const jwt2 = "JWT ";
             axios.defaults.baseURL = 'http://chaofavc.somprasongd.work:81'
-            axios.defaults.headers.common['Authorization'] = `JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZ3JvdXBzIjpbeyJpZCI6MSwibmFtZSI6InJlZ2lzdGVyIn0seyJpZCI6MiwibmFtZSI6ImRvY3RvciJ9LHsiaWQiOjMsIm5hbWUiOiJsYWIifSx7ImlkIjo0LCJuYW1lIjoicGhhcm1hY3kifSx7ImlkIjo1LCJuYW1lIjoiY2FzaGllciJ9XSwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNTU0MTkyNDA5fQ.O923cGJ8aiEji_E1SzPz5PjD1PsGNhhDB3JTD2M6TP8`
+            axios.defaults.headers.common['Authorization'] = jwt2 + token2;
             axios
                 .get('/api/base/item-frequencies')
                 .then(function (res) {
@@ -193,8 +204,10 @@ export default new Vuex.Store({
         },
         callInstruction() {
             var self = this;
+            const token2 = sessionStorage.getItem("token");
+            const jwt2 = "JWT ";
             axios.defaults.baseURL = 'http://chaofavc.somprasongd.work:81'
-            axios.defaults.headers.common['Authorization'] = `JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZ3JvdXBzIjpbeyJpZCI6MSwibmFtZSI6InJlZ2lzdGVyIn0seyJpZCI6MiwibmFtZSI6ImRvY3RvciJ9LHsiaWQiOjMsIm5hbWUiOiJsYWIifSx7ImlkIjo0LCJuYW1lIjoicGhhcm1hY3kifSx7ImlkIjo1LCJuYW1lIjoiY2FzaGllciJ9XSwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNTU0MTkyNDA5fQ.O923cGJ8aiEji_E1SzPz5PjD1PsGNhhDB3JTD2M6TP8`
+            axios.defaults.headers.common['Authorization'] = jwt2 + token2;
             axios
                 .get('/api/base/item-instructions')
                 .then(function (res) {
@@ -211,8 +224,10 @@ export default new Vuex.Store({
         },
         callUnit() {
             var self = this;
+            const token2 = sessionStorage.getItem("token");
+            const jwt2 = "JWT ";
             axios.defaults.baseURL = 'http://chaofavc.somprasongd.work:81'
-            axios.defaults.headers.common['Authorization'] = `JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZ3JvdXBzIjpbeyJpZCI6MSwibmFtZSI6InJlZ2lzdGVyIn0seyJpZCI6MiwibmFtZSI6ImRvY3RvciJ9LHsiaWQiOjMsIm5hbWUiOiJsYWIifSx7ImlkIjo0LCJuYW1lIjoicGhhcm1hY3kifSx7ImlkIjo1LCJuYW1lIjoiY2FzaGllciJ9XSwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNTU0MTkyNDA5fQ.O923cGJ8aiEji_E1SzPz5PjD1PsGNhhDB3JTD2M6TP8`
+            axios.defaults.headers.common['Authorization'] = jwt2 + token2;
             axios
                 .get('/api/base/item-units')
                 .then(function (res) {
@@ -253,12 +268,13 @@ export default new Vuex.Store({
             var self = this;
             self.state.snackbar = false;
         },
-        getLogin(state , value){
+        getLogin(state, value) {
             state.username = value.username;
             state.password = value.password;
         },
-        login(state){
-            state.token = state.loginData.token;
+        login(state, token) {
+            state.token = token
+            // console.log('--'+state.token);
         }
     }
 });
