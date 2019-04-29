@@ -43,6 +43,18 @@
           v-on:click="getLogin()"
         >Login</v-btn>
       </b-form-group>
+
+      <v-snackbar
+        v-model="snackbar"
+        :bottom="y === 'bottom'"
+        :top="y === 'top'"
+        :right="x === 'right'"
+        :timeout="timeout"
+        color="red"
+      >
+        Invalid username or password.
+        <v-btn color="white" flat @click="snackbar = false">ปิด</v-btn>
+      </v-snackbar>
     </div>
   </div>
 </template>
@@ -56,31 +68,35 @@ export default {
     return {
       username: "",
       password: "",
-      todos: []
+      todos: [],
+      snackbar:false,
+      y: "bottom",
+      x: "right",
+      timeout: 0
     };
   },
   methods: {
-    //  login(){
-    //     this.todos.push({username:this.username , password:this.password});
-    //     sessionStorage.setItem('session-storage' , JSON.stringify(this.todos));
-    //   },
     ...mapActions(["login"]),
 
     async getLogin() {
+      // this.todos.push({ username: this.username, password: this.password });
+      // sessionStorage.setItem("user", JSON.stringify(this.todos));
 
-      this.todos.push({ username: this.username, password: this.password });
-      sessionStorage.setItem("session-storage", JSON.stringify(this.todos));
-      
       let data = { username: this.username, password: this.password };
       this.$store.commit("getLogin", data);
-      try{
+      var route = null;
+
+      try {
         await this.login();
-      }catch(e) {console.log(e)}
-      
-      console.log('logined')
-      // this.todos.push({ username: this.username, password: this.password });
-      // sessionStorage.setItem("session-storage", JSON.stringify(this.todos));
-      this.$router.push({ path: "./users" });
+        route = "users";
+      } catch (e) {
+        console.log("asd" + e);
+        route = "login";
+        this.snackbar = true;
+      }
+
+      console.log("logined");
+      this.$router.push({ path: "./" + route });
     }
   }
 };

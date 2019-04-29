@@ -10,8 +10,8 @@
         <v-toolbar-title class="toolbar">chaofa vet clinic : Setting App</v-toolbar-title>
 
         <v-spacer></v-spacer>
-
-        <v-btn icon v-on:click="logout()" @click.stop="dialog = true">
+        <v-toolbar-title class="toolbar2">{{username}}</v-toolbar-title>
+        <v-btn icon @click.stop="dialog = true">
           <label style="font-size: 0.7em; color:white;">
             <v-icon style="color:white;">exit_to_app</v-icon>
             <br>log out
@@ -62,7 +62,7 @@
               </v-list-tile>
             </template>
             <router-link
-              :to="'/' + item.path"
+              :to="'/admin/' + item.path"
               v-for="item in items"
               :key="item.title"
               style="color:white; "
@@ -85,7 +85,7 @@
               </v-list-tile>
             </template>
             <router-link
-              :to="'/' + item.path"
+              :to="'/admin/' + item.path"
               v-for="item in items2"
               :key="item.title"
               style="color:white; "
@@ -111,8 +111,8 @@
         <v-toolbar-title class="toolbar">chaofa vet clinic : Setting App</v-toolbar-title>
 
         <v-spacer></v-spacer>
-
-        <v-btn icon v-on:click="logout()" @click.stop="dialog = true">
+        <v-toolbar-title class="toolbar2">{{username}}</v-toolbar-title>
+        <v-btn icon @click.stop="dialog = true">
           <label style="font-size: 0.7em; color:white;">
             <v-icon style="color:white;">exit_to_app</v-icon>
             <br>log out
@@ -127,7 +127,10 @@
         <v-card-text>Are you want to logout ?</v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="green darken-1" flat @click="dialog = false">Yes</v-btn>
+          <router-link  to="/admin/login" class="rtl">
+            <v-btn color="green darken-1" flat @click="dialog = false" v-on:click="logout()">Yes</v-btn>
+          </router-link>
+
           <v-btn color="red darken-1" flat @click="dialog = false">Cancel</v-btn>
         </v-card-actions>
       </v-card>
@@ -136,9 +139,14 @@
 </template>
 <script>
 import NavigationAddEdit from "./NavigationAddEdit.vue";
+import axios from "axios";
+import { mapState } from "vuex";
 export default {
   components: {
     NavigationAddEdit
+  },
+  computed: {
+    ...mapState(["username"])
   },
   data() {
     return {
@@ -150,6 +158,7 @@ export default {
         { title: "Physical Examinations", path: "physical" }
       ],
       items2: [
+        { title: "Item", path: "item" },
         { title: "Caution", path: "caution" },
         { title: "Frequency", path: "frequency" },
         { title: "Instruction", path: "instruction" },
@@ -163,19 +172,35 @@ export default {
   },
   methods: {
     logout() {
-      console.log("log out .....");
+      console.log("log out.");
+      sessionStorage.removeItem("admin");
+      
+      delete axios.defaults.headers.common["Authorization"];
+
+      // this.$router.push({ path: "./login"});
     }
   }
 };
 </script>
 
 <style scoped>
+.rtl{
+  text-decoration: none;
+
+}
 .toolbar {
   text-transform: uppercase;
   color: white;
   font-weight: bold;
   font-size: 1.3em;
   text-shadow: 0.1em 0.1em 0.2em black;
+}
+.toolbar2 {
+  color: white;
+  font-weight: bold;
+  font-size: 1em;
+  text-shadow: 0.1em 0.1em 0.2em black;
+  margin-right: 1.5%;
 }
 @media (min-width: 992px) {
   .header2 {

@@ -30,11 +30,11 @@
             <v-checkbox class="chBox" color="blue" v-model="item.isAdmin" label="Staff status" ></v-checkbox>
           </v-flex>
 
-          <router-link to="/users" class="rtl">
+          <router-link to="/admin/users" class="rtl">
             <v-btn small color="green" style="color:white;" v-on:click="editUser(item)">SAVE</v-btn>
           </router-link>
 
-          <router-link to="/users" class="rtl">
+          <router-link to="/admin/users" class="rtl">
             <v-btn small color="red" style="color:white;">cancel</v-btn>
           </router-link>
         </div>

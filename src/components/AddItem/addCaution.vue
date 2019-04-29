@@ -34,11 +34,11 @@
             ></v-checkbox>
           </v-flex>
 
-          <router-link to="/caution" class="rtl">
+          <router-link to="/admin/caution" class="rtl">
             <v-btn small color="green" style="color:white; " v-on:click="addCC()">SAVE</v-btn>
           </router-link>
 
-          <router-link to="/caution" class="rtl">
+          <router-link to="/admin/caution" class="rtl">
             <v-btn small color="red" style="color:white;">cancel</v-btn>
           </router-link>
         </div>
@@ -66,10 +66,6 @@ export default {
   methods: {
     addCC() {
       var self = this;
-      // const token2 = sessionStorage.getItem("token");
-      // const jwt2 = "JWT ";
-      // axios.defaults.baseURL = "http://chaofavc.somprasongd.work:81";
-      // axios.defaults.headers.common["Authorization"] = jwt2 + token2;
       axios
         .post("/api/base/item-cautions", {
           code: this.code,

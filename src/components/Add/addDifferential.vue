@@ -34,11 +34,11 @@
             ></v-checkbox>
           </v-flex>
 
-          <router-link to="/differential" class="rtl">
+          <router-link to="/admin/differential" class="rtl">
             <v-btn small color="green" style="color:white;" v-on:click="addEX()">SAVE</v-btn>
           </router-link>
 
-          <router-link to="/differential" class="rtl">
+          <router-link to="/admin/differential" class="rtl">
             <v-btn small color="red" style="color:white;">cancel</v-btn>
           </router-link>
         </div>

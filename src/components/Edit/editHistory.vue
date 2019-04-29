@@ -35,11 +35,11 @@
             ></v-checkbox>
           </v-flex>
 
-          <router-link to="/history" class="rtl">
+          <router-link to="/admin/history" class="rtl">
             <v-btn small color="green" style="color:white;" v-on:click="editHT(item)">SAVE</v-btn>
           </router-link>
 
-          <router-link to="/history" class="rtl">
+          <router-link to="/admin/history" class="rtl">
             <v-btn small color="red" style="color:white;">cancel</v-btn>
           </router-link>
         </div>

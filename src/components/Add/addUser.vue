@@ -62,11 +62,11 @@
           <!-- <v-flex xs10 offset-xs1>
             <v-text-field label="Username" v-model="username" style="font-size:1.7em;"></v-text-field>
           </v-flex>-->
-          <router-link to="/users" class="rtl">
+          <router-link to="/admin/users" class="rtl">
             <v-btn small color="green" style="color:white;" v-on:click="addUser()">SAVE</v-btn>
           </router-link>
 
-          <router-link to="/users" class="rtl">
+          <router-link to="/admin/users" class="rtl">
             <v-btn small color="red" style="color:white;">cancel</v-btn>
           </router-link>
         </div>

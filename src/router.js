@@ -24,61 +24,67 @@ import Caution from './page/Caution.vue'
 import Frequency from './page/Frequency.vue'
 import Unit from './page/Unit.vue'
 import Instruction from './page/Instruction.vue'
+import Item from './page/Item.vue'
 
 import addCaution from './components/AddItem/addCaution.vue'
 import addFrequency from './components/AddItem/addFrequency.vue'
 import addInstruction from './components/AddItem/addInstruction.vue'
 import addUnit from './components/AddItem/addUnit.vue'
+import addItem from './components/AddItem/addItem.vue'
 
 import editCaution from './components/EditItem/editCaution.vue'
 import editFrequency from './components/EditItem/editFrequency.vue'
 import editInstruction from './components/EditItem/editInstruction.vue'
 import editUnit from './components/EditItem/editUnit.vue'
+import editItem from './components/EditItem/editItem.vue'
 
 Vue.use(Router);
 
 const routes = [
-   { path: '/login', component: Login },
-   { path: '/chiefComplaints', component: chiefComplaints },
-   { path: '/differential', component: differentialDiagnosis },
-   {path: '/history', component: historyRankings },
-   {path: '/physical', component: physicalExam },
-   {path: '/users', component: user },
+   { path: '/admin/login', component: Login },
+   { path: '/admin/chiefComplaints', component: chiefComplaints },
+   { path: '/admin/differential', component: differentialDiagnosis },
+   {path: '/admin/history', component: historyRankings },
+   {path: '/admin/physical', component: physicalExam },
+   {path: '/admin/users', component: user },
 
-   {path: '/history/edit/:id', component: editHistory },
-   {path: '/history/add', component: addHistory },
+   {path: '/admin/history/edit/:id', component: editHistory },
+   {path: '/admin/history/add', component: addHistory },
 
-   {path: '/physical/edit/:id', component: editPhysical },
-   {path: '/physical/add', component: addPhysical },
+   {path: '/admin/physical/edit/:id', component: editPhysical },
+   {path: '/admin/physical/add', component: addPhysical },
 
-   {path: '/differential/edit/:id', component: editDifferential },
-   {path: '/differential/add', component: addDifferential },
+   {path: '/admin/differential/edit/:id', component: editDifferential },
+   {path: '/admin/differential/add', component: addDifferential },
 
-   {path: '/chiefComplaints/edit/:id', component: editchiefComplaints },
-   {path: '/chiefComplaints/add', component: addchiefComplaints },
+   {path: '/admin/chiefComplaints/edit/:id', component: editchiefComplaints },
+   {path: '/admin/chiefComplaints/add', component: addchiefComplaints },
 
-   {path: '/users/edit/:id', component: editUser },
-   {path: '/users/add', component: addUser },
+   {path: '/admin/users/edit/:id', component: editUser },
+   {path: '/admin/users/add', component: addUser },
 
-   { path: '/caution', component: Caution },
-   { path: '/frequency', component: Frequency },
-   { path: '/unit', component: Unit },
-   { path: '/instruction', component: Instruction },
+   { path: '/admin/caution', component: Caution },
+   { path: '/admin/frequency', component: Frequency },
+   { path: '/admin/unit', component: Unit },
+   { path: '/admin/instruction', component: Instruction },
+   { path: '/admin/item', component: Item },
 
-   {path: '/caution/add', component: addCaution },
-   {path: '/frequency/add', component: addFrequency },
-   {path: '/unit/add', component: addUnit },
-   {path: '/instruction/add', component: addInstruction },
+   {path: '/admin/caution/add', component: addCaution },
+   {path: '/admin/frequency/add', component: addFrequency },
+   {path: '/admin/unit/add', component: addUnit },
+   {path: '/admin/instruction/add', component: addInstruction },
+   { path: '/admin/item/add', component: addItem },
 
-   {path: '/caution/edit/:id', component: editCaution },
-   {path: '/frequency/edit/:id', component: editFrequency },
-   {path: '/unit/edit/:id', component: editUnit },
-   {path: '/instruction/edit/:id', component: editInstruction },
+   {path: '/admin/caution/edit/:id', component: editCaution },
+   {path: '/admin/frequency/edit/:id', component: editFrequency },
+   {path: '/admin/unit/edit/:id', component: editUnit },
+   {path: '/admin/instruction/edit/:id', component: editInstruction },
+   { path: '/admin/item/edit/:id', component: editItem }
 ];
 
 const router = new Router({
     routes ,
-    base: '/admin/',
+    // base: '/admin/',
     mode: 'history'
   })
 

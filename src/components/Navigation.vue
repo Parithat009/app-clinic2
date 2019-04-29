@@ -49,6 +49,7 @@ export default {
         { title: "Physical Examinations", path: "physical" }
       ],
       items2: [
+        { title: "Item", path: "item" },
         { title: "Caution", path: "caution" },
         { title: "Frequency", path: "frequency" },
         { title: "Instruction", path: "instruction" },

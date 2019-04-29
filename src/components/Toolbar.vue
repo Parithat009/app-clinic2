@@ -10,8 +10,8 @@
         <v-toolbar-title class="toolbar">chaofa vet clinic : Setting App</v-toolbar-title>
 
         <v-spacer></v-spacer>
-
-        <v-btn icon v-on:click="logout()" @click.stop="dialog = true">
+        <v-toolbar-title class="toolbar2">{{username}}</v-toolbar-title>
+        <v-btn icon @click.stop="dialog = true">
           <label style="font-size: 0.7em; color:white;">
             <v-icon style="color:white;">exit_to_app</v-icon>
             <br>log out
@@ -98,8 +98,8 @@
         <v-toolbar-title class="toolbar">chaofa vet clinic : Setting App</v-toolbar-title>
 
         <v-spacer></v-spacer>
-
-        <v-btn icon v-on:click="logout()" @click.stop="dialog = true">
+        <v-toolbar-title class="toolbar2">{{username}}</v-toolbar-title>
+        <v-btn icon @click.stop="dialog = true">
           <label style="font-size: 0.7em; color:white;">
             <v-icon style="color:white;">exit_to_app</v-icon>
             <br>log out
@@ -114,7 +114,7 @@
         <v-card-text>Are you want to logout ?</v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="green darken-1" flat @click="dialog = false">Yes</v-btn>
+          <v-btn color="green darken-1" flat @click="dialog = false" v-on:click="logout()">Yes</v-btn>
           <v-btn color="red darken-1" flat @click="dialog = false">Cancel</v-btn>
         </v-card-actions>
       </v-card>
@@ -124,9 +124,13 @@
 <script>
 import Navigation from "./Navigation.vue";
 import axios from "axios";
+import { mapState } from "vuex";
 export default {
   components: {
     Navigation
+  },
+  computed: {
+    ...mapState(["username"])
   },
   data() {
     return {
@@ -138,6 +142,7 @@ export default {
         { title: "Physical Examinations", path: "physical" }
       ],
       items2: [
+        { title: "Item", path: "item" },
         { title: "Caution", path: "caution" },
         { title: "Frequency", path: "frequency" },
         { title: "Instruction", path: "instruction" },
@@ -152,8 +157,11 @@ export default {
   methods: {
     logout() {
       console.log("log out.");
-      sessionStorage.removeItem("token");
+      sessionStorage.removeItem("admin");
+      
       delete axios.defaults.headers.common["Authorization"];
+
+      this.$router.push({ path: "./login" });
     },
     goto(i) {
       console.log(i);
@@ -196,5 +204,12 @@ export default {
   font-weight: bold;
   font-size: 1.3em;
   text-shadow: 0.1em 0.1em 0.2em black;
+}
+.toolbar2 {
+  color: white;
+  font-weight: bold;
+  font-size: 1em;
+  text-shadow: 0.1em 0.1em 0.2em black;
+  margin-right: 1.5%;
 }
 </style>

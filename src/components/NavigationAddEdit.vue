@@ -9,7 +9,7 @@
             </v-list-tile>
           </template>
           <router-link
-            :to="'/' + item.path"
+            :to="'/admin/' + item.path"
             v-for="item in items"
             :key="item.title"
             style="color:white; "
@@ -33,7 +33,7 @@
             </v-list-tile>
           </template>
           <router-link
-            :to="'/' + item.path"
+            :to="'/admin/' + item.path"
             v-for="item in items2"
             :key="item.title"
             style="color:white; "
@@ -65,6 +65,7 @@ export default {
         { title: "Physical Examinations", path: "physical" }
       ],
       items2: [
+        { title: "Item", path: "item" },
         { title: "Caution", path: "caution" },
         { title: "Frequency", path: "frequency" },
         { title: "Instruction", path: "instruction" },
@@ -75,7 +76,7 @@ export default {
   methods: {
     goto(i) {
       console.log(i);
-      this.$router.push({ path: "./" + i });
+      this.$router.push({ path: "./admin/" + i });
     }
   }
 };
@@ -88,7 +89,7 @@ export default {
 .menu {
   width: 17%;
   float: left;
-  height: 120vh;
+  height: 150vh;
 }
 </style>
 

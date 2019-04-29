@@ -34,11 +34,11 @@
             ></v-checkbox>
           </v-flex>
 
-          <router-link to="/physical" class="rtl">
+          <router-link to="/admin/physical" class="rtl">
             <v-btn small color="green" style="color:white;" v-on:click="addPE()">SAVE</v-btn>
           </router-link>
 
-          <router-link to="/physical" class="rtl">
+          <router-link to="/admin/physical" class="rtl">
             <v-btn small color="red" style="color:white;">cancel</v-btn>
           </router-link>
         </div>
