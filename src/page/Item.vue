@@ -20,7 +20,7 @@
       </b-navbar>
 
       <v-card style="width:100%; box-shadow: 5px 5px 5px #ccc;">
-        <v-data-table :headers="headers" :items="unit.results" :search="search">
+        <v-data-table :headers="headers" :items="item.results" :search="search">
           <template v-slot:items="props" v-slot:activator class="float-right">
             <td class="td1" style=" font-size:1.2em; padding:20px;">{{ props.item.code }}</td>
 
@@ -146,7 +146,7 @@ export default {
     Toolbar
   },
   computed: {
-    ...mapState(["unit", "snColor", "snText", "snackbar"])
+    ...mapState(["item", "snColor", "snText", "snackbar"])
   },
 
   data() {
@@ -183,13 +183,13 @@ export default {
       //   "Authorization"
       // ] = `JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZ3JvdXBzIjpbeyJpZCI6MSwibmFtZSI6InJlZ2lzdGVyIn0seyJpZCI6MiwibmFtZSI6ImRvY3RvciJ9LHsiaWQiOjMsIm5hbWUiOiJsYWIifSx7ImlkIjo0LCJuYW1lIjoicGhhcm1hY3kifSx7ImlkIjo1LCJuYW1lIjoiY2FzaGllciJ9XSwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNTU0MTkyNDA5fQ.O923cGJ8aiEji_E1SzPz5PjD1PsGNhhDB3JTD2M6TP8`;
 
-      axios
-        .delete("/api/base/item-units/" + self.delete.id)
-        .then(function(response) {
-          console.log(response);
-          self.callUnit();
-          self.snAdd();
-        });
+      // axios
+      //   .delete("/api/base/item-units/" + self.delete.id)
+      //   .then(function(response) {
+      //     console.log(response);
+      //     self.callUnit();
+      //     self.snAdd();
+      //   });
     },
 
     editCode(i) {
@@ -198,13 +198,13 @@ export default {
     add() {
       this.$router.push({ path: "./item/add" });
     },
-    ...mapActions(["callUnit", "snStop","snAdd"])
+    ...mapActions(["callItem", "snStop", "snAdd"])
   },
   mounted() {
-    this.callUnit();
+    this.callItem();
     this.$nextTick(() => {
       setTimeout(() => {
-        this.callUnit();
+        this.callItem();
       }, 400);
     });
   }

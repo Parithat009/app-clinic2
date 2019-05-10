@@ -4,7 +4,7 @@
       <b-form-group id="exampleInputGroup1" label-for="exampleInput1" class="loginForm">
         <div class="loginForm-logo">
           <img src="../image/icon.png">
-          <label style="text-shadow: 0.1em 0.1em 0.2em black;">Chaofa Vet Clinic</label>
+          <label style="text-shadow: 0.1em 0.1em 0.2em black;">chaofa vet clinic</label>
         </div>
 
         <div class="loginForm-input">

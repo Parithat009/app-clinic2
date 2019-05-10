@@ -24,6 +24,7 @@ export default new Vuex.Store({
         frequency: {},
         instruction: {},
         unit: {},
+        item:{}
 
         // user: null,
 
@@ -246,11 +247,32 @@ export default new Vuex.Store({
                 .get('/api/base/item-units')
                 .then(function (res) {
                     if (res.status !== 200) {
-                        self.state.data = null;
+                        self.state.unit = null;
                         return;
                     }
                     self.state.unit = res.data;
                     console.log(self.state.unit);
+                })
+                .catch(function (error) {
+                    console.log("Error:", error);
+                });
+        },
+        callItem() {
+            var self = this;
+            const token2 = sessionStorage.getItem("admin");
+            const token3 = JSON.parse(token2);
+            const jwt2 = "JWT ";
+            axios.defaults.baseURL = 'http://chaofavc.somprasongd.work:81'
+            axios.defaults.headers.common['Authorization'] = jwt2 + token3.token;
+            axios
+                .get('/api/base/items')
+                .then(function (res) {
+                    if (res.status !== 200) {
+                        self.state.item = null;
+                        return;
+                    }
+                    self.state.item = res.data;
+                    console.log(self.state.item);
                 })
                 .catch(function (error) {
                     console.log("Error:", error);
