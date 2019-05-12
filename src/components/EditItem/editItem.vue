@@ -238,9 +238,10 @@
             </v-flex>
           </div>
           <div v-if="radios == 'item set'">
-            <h1>page item set ....</h1>
-            <h2>item set</h2>
+            <h1>item set ...</h1>
+            <h3>...3</h3>
           </div>
+          <button v-on:click="cl()">123</button>
 
           <router-link to="/admin/item" class="rtl">
             <v-btn small color="green" style="color:white;" v-on:click="editCC(item)">SAVE</v-btn>
@@ -291,7 +292,9 @@ export default {
       itemdrug: {},
       itemlab: {},
       labtest: {},
-      result: ""
+      result: "",
+      elementPrice: null,
+      elementDrug: null
     };
   },
   computed: {
@@ -307,8 +310,28 @@ export default {
       "callFrequency",
       "callInstruction"
     ]),
-
+    cl() {
+      // for (let index = 0; index < this.itemdrug.results.length; index++) {
+      //   const element = this.itemdrug.results[index];
+      //   if (element.item.id == this.$route.params.id) {
+      //     this.elementDrug = element;
+      //   }
+      // }
+    },
     editCC(item) {
+      for (let index = 0; index < this.itemprice.results.length; index++) {
+        const element = this.itemprice.results[index];
+        if (element.itemId == this.$route.params.id) {
+          this.elementPrice = element;
+          console.log(this.elementPrice.cost);
+        }
+      }
+      for (let index = 0; index < this.itemdrug.results.length; index++) {
+        const element = this.itemdrug.results[index];
+        if (element.item.id == this.$route.params.id) {
+          this.elementDrug = element;
+        }
+      }
       var self = this;
 
       axios
@@ -330,9 +353,28 @@ export default {
         });
 
       axios
-        .put("/api/base/item-prices/" + self.$route.params.id, {
-          cost: this.pr.cost,
-          price: this.pr.price
+        .put("/api/base/item-prices/" + this.elementPrice.id, {
+          cost: this.elementPrice.cost,
+          price: this.elementPrice.price
+        })
+        .then(function(response) {
+          console.log(response);
+          self.callItem();
+          self.snAdd();
+        })
+        .catch(function(error) {
+          console.log(error);
+          self.snAddErr();
+        });
+
+      axios
+        .put("/api/base/item-drugs/" + this.elementDrug.id, {
+          description: this.elementDrug.description,
+          dose: this.elementDrug.dose,
+          itemCautionId : this.elementDrug.itemCaution.id,
+          itemFrequencyId :this.elementDrug.itemFrequency.id,
+          itemInstructionId : this.elementDrug.itemInstruction.id,
+          itemUnitId : this.elementDrug.itemUnit.id
         })
         .then(function(response) {
           console.log(response);
